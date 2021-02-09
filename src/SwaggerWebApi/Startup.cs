@@ -55,6 +55,14 @@ namespace SwaggerWebApi
         {
             if (env.IsDevelopment())
             {
+                app.UseSwagger();
+                app.UseSwaggerUI(s =>
+                {
+                    s.RoutePrefix = "swagger";
+                    s.InjectStylesheet("/swagger.css");
+                    s.SwaggerEndpoint("/swagger/v1/swagger.json", "Api Example");
+                });
+                app.UseStaticFiles();
                 app.UseDeveloperExceptionPage();
             }
 
@@ -69,13 +77,7 @@ namespace SwaggerWebApi
                 endpoints.MapControllers();
             });
 
-            app.UseSwagger();
-
-            app.UseSwaggerUI(s =>
-            {
-                s.RoutePrefix = "swagger";
-                s.SwaggerEndpoint("/swagger/v1/swagger.json", "Api Example");
-            });
+            
 
 
         }
